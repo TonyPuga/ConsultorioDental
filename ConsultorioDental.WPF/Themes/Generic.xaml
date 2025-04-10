@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ConsultorioDental.WPF.Controls">
+
+    <Style TargetType="{x:Type local:SeccionControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SeccionControl}">
+                    <Grid x:Name="LayoutRoot" Margin="0,0,0,0" Width="Auto" Height="Auto" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition />
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9"/>
+                            <ColumnDefinition Width="0.522*"/>
+                            <ColumnDefinition Width="0.023*"/>
+                            <ColumnDefinition Width="0.429*"/>
+                            <ColumnDefinition Width="0.012*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="grdFondoSeccion" Margin="0" Grid.RowSpan="4" Grid.ColumnSpan="5" Opacity="0.33">
+                            <Border BorderThickness="1" Margin="0" CornerRadius="0" Background="White">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#FFFFFF" BlurRadius="0" Opacity="0.715" Direction="313" RenderingBias="Quality"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Border x:Name="brdTituloSeccion" BorderThickness="0,0,0,1" Grid.Column="1" Margin="0,1,0,9" Grid.Row="1" Grid.ColumnSpan="3">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#D4D4D4" Offset="0"/>
+                                    <GradientStop Color="#D4D4D4" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+
+                            <StackPanel  x:Name="stpResultado" Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="Auto" Grid.RowSpan="1" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="0,1,5,9">
+                                <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#34495E" FontWeight="Bold" Text="{TemplateBinding TituloSeccion}"  HorizontalAlignment="Left" />
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="#EEC60C" FontWeight="Bold" Text="{TemplateBinding ValorTituloSeccion}"  HorizontalAlignment="Left" />
+                                <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#EEC60C" FontWeight="Bold" Text="{TemplateBinding TituloSeccion1}"  HorizontalAlignment="Left" />
+                                <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#EEC60C" FontWeight="Bold" Text="{TemplateBinding ValorTituloSeccion1}"  HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </Border>
+                        <StackPanel x:Name="stpTituloDerecha" Grid.ColumnSpan="1" HorizontalAlignment="Right" Height="Auto" Grid.RowSpan="1" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="0,1,5,9">
+                            <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#FF187FBA" FontWeight="Bold" Text="{TemplateBinding TituloDerecha1}"  HorizontalAlignment="Right" />
+                            <TextBlock TextWrapping="Wrap" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="#FF187FBA" FontWeight="Bold" Text="{TemplateBinding ValorTituloDerecha1}"  HorizontalAlignment="Right" />
+                            <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#FF187FBA" FontWeight="Bold" Text="{TemplateBinding TituloDerecha}"  HorizontalAlignment="Right" />
+                            <TextBlock TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Foreground="#FF187FBA" FontWeight="Bold" Text="{TemplateBinding ValorTituloDerecha}"  HorizontalAlignment="Right" />
+                        </StackPanel>
+                        <Border x:Name="brdContenido" BorderBrush="#D4D4D4" BorderThickness="0" Grid.Column="1" Margin="0" Grid.Row="2" Grid.ColumnSpan="3" >
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

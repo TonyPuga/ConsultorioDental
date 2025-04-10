@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="ConsultorioDental.WPF.Views.PatientViews.PacienteViews.PacienteForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="White">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Padding="20" CornerRadius="12" Background="White" BorderBrush="#DDD" BorderThickness="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="650">
+
+                <TextBlock Text="Registro de Paciente" FontSize="22" FontWeight="Bold"
+                           Foreground="#2E86C1" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+                <!-- DATOS DEL PACIENTE -->
+                <GroupBox Header="Datos del Paciente" Margin="0,0,0,20" Padding="10">
+                    <StackPanel Orientation="Vertical">
+
+                        <!-- Documento de identidad -->
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Tipo DOI" />
+                                <ComboBox ItemsSource="{Binding TiposDOI}"
+                                          SelectedValue="{Binding Paciente.TipoDOI}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Número DOI" />
+                                <TextBox Text="{Binding Paciente.NumeroDOI}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <!-- Nombres y Apellidos -->
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Nombres" />
+                                <TextBox Text="{Binding Paciente.Nombres}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Apellido Paterno" />
+                                <TextBox Text="{Binding Paciente.ApellidoPaterno}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Apellido Materno" />
+                                <TextBox Text="{Binding Paciente.ApellidoMaterno}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Fecha Nacimiento" />
+                                <DatePicker SelectedDate="{Binding Paciente.FechaNacimiento}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <!-- Teléfono y Correo -->
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Teléfono" />
+                                <TextBox Text="{Binding Paciente.Telefono}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Correo Electrónico" />
+                                <TextBox Text="{Binding Paciente.CorreoElectronico}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <!-- Dirección -->
+                        <TextBlock Text="Dirección" FontWeight="SemiBold" Margin="5"/>
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Departamento" />
+                                <ComboBox ItemsSource="{Binding Departamentos}"
+                                          SelectedValue="{Binding Paciente.Direccion.DepartamentoId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Provincia" />
+                                <ComboBox ItemsSource="{Binding Provincias}"
+                                          SelectedValue="{Binding Paciente.Direccion.ProvinciaId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Distrito" />
+                                <ComboBox ItemsSource="{Binding Distritos}"
+                                          SelectedValue="{Binding Paciente.Direccion.DistritoId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Dirección Detallada" />
+                                <TextBox Text="{Binding Paciente.Direccion.Detalle}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- DATOS DEL APODERADO -->
+                <GroupBox Header="Datos del Apoderado (Opcional)" Padding="10">
+                    <StackPanel Orientation="Vertical">
+
+                        <!-- Parentesco -->
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Tipo de Parentesco" />
+                            <ComboBox ItemsSource="{Binding TiposParentesco}"
+                                      SelectedValue="{Binding Paciente.Apoderado.TipoParentesco.Id}"
+                                      DisplayMemberPath="Nombre"
+                                      SelectedValuePath="Id"/>
+                        </StackPanel>
+
+                        <!-- Documento y Datos -->
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Tipo DOI" />
+                                <ComboBox ItemsSource="{Binding TiposDOI}"
+                                          SelectedValue="{Binding Paciente.Apoderado.TipoDOI}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Número DOI" />
+                                <TextBox Text="{Binding Paciente.Apoderado.NumeroDOI}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Nombres" />
+                                <TextBox Text="{Binding Paciente.Apoderado.Nombres}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Apellido Paterno" />
+                                <TextBox Text="{Binding Paciente.Apoderado.ApellidoPaterno}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Apellido Materno" />
+                                <TextBox Text="{Binding Paciente.Apoderado.ApellidoMaterno}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Fecha Nacimiento" />
+                                <DatePicker SelectedDate="{Binding Paciente.Apoderado.FechaNacimiento}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Teléfono" />
+                                <TextBox Text="{Binding Paciente.Apoderado.Telefono}" />
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Correo Electrónico" />
+                                <TextBox Text="{Binding Paciente.Apoderado.CorreoElectronico}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <!-- Dirección Apoderado -->
+                        <TextBlock Text="Dirección Apoderado" FontWeight="SemiBold" Margin="5"/>
+                        <UniformGrid Columns="2" Margin="0,5">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Departamento" />
+                                <ComboBox ItemsSource="{Binding Departamentos}"
+                                          SelectedValue="{Binding Paciente.Apoderado.Direccion.DepartamentoId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Provincia" />
+                                <ComboBox ItemsSource="{Binding Provincias}"
+                                          SelectedValue="{Binding Paciente.Apoderado.Direccion.ProvinciaId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Distrito" />
+                                <ComboBox ItemsSource="{Binding Distritos}"
+                                          SelectedValue="{Binding Paciente.Apoderado.Direccion.DistritoId}"
+                                          DisplayMemberPath="Nombre"
+                                          SelectedValuePath="Id"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Dirección Detallada" />
+                                <TextBox Text="{Binding Paciente.Apoderado.Direccion.Detalle}" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Botones -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" >
+                    <Button Content="Guardar" Width="120" Margin="10,0,0,0"
+                            Background="#2ECC71" Foreground="White"
+                            Command="{Binding GuardarCommand}" />
+                    <Button Content="Cancelar" Width="120" Margin="10,0,0,0"
+                            Background="#E74C3C" Foreground="White"
+                            Command="{Binding CancelarCommand}" />
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</UserControl>

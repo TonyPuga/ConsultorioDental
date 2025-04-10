@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ConsultorioDental.WPF.Views.PatientViews.PatientsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <!-- Menú horizontal superior -->
+        <Menu DockPanel.Dock="Top" Background="#34495E" Foreground="White" FontSize="16" Height="30" HorizontalAlignment="Stretch">
+            <MenuItem Header="Registro de Pacientes" Command="{Binding RegistroPacienteCommand}" HorizontalAlignment="Right" />
+            <MenuItem Header="Salir" Command="{Binding NavigateCommand}" CommandParameter="Dashboard" HorizontalAlignment="Right" />
+        </Menu>
+
+        <!-- Contenido principal -->
+        <Grid>
+            <!--<TextBlock Text="Módulo de Pacientes"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="24"
+                       Foreground="#2C3E50"/>-->
+            <!-- ContentControl para mostrar UserControls dinámicamente -->
+            <ContentControl Content="{Binding ContenidoActual}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Margin="10"/>
+        </Grid>
+    </DockPanel>
+</UserControl>

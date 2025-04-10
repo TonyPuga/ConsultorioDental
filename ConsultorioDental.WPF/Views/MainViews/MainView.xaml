@@ -1,0 +1,45 @@
+﻿<Window x:Class="ConsultorioDental.WPF.Views.MainViews.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConsultorioDental.WPF.Helpers"
+        mc:Ignorable="d"
+        Title="Dental Clinic" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Lateral izquierdo -->
+        <StackPanel x:Name="Sidebar"
+                    Width="200"
+                    Background="#2C3E50"
+                    DockPanel.Dock="Left"
+                    Visibility="{Binding IsSidebarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Button Content="Dashboard" Command="{Binding NavigateCommand}" CommandParameter="Dashboard" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Pacientes" Command="{Binding NavigateCommand}" CommandParameter="Patients" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Citas" Command="{Binding NavigateCommand}" CommandParameter="Appointments" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Facturación" Command="{Binding NavigateCommand}" CommandParameter="Billing" Style="{StaticResource MenuButtonStyle}"/>
+        </StackPanel>
+
+        <!-- Contenido principal -->
+        <Grid>
+            <!-- Botón hamburguesa -->
+            <Button Content="☰"
+                    Width="50" Height="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="5"
+                    Command="{Binding ToggleSidebarCommand}"
+                    Style="{StaticResource ToggleButtonStyle}"/>
+
+            <!-- Vista actual cargada dinámicamente -->
+            <ContentControl Content="{Binding CurrentView}"
+                            Margin="60,0,0,0"/>
+        </Grid>
+    </DockPanel>
+</Window>
