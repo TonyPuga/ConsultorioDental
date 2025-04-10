@@ -52,7 +52,15 @@ public partial class PacienteBusquedaViewModel : ObservableObject
     [RelayCommand]
     private void Nuevo()
     {
-        _modulo.ContenidoActual = new PacienteView();
+        //_modulo.ContenidoActual = new PacienteView();
+        var viewModel = new PacienteViewModel(_modulo);
+        var view = new PacienteView
+        {
+            DataContext = viewModel
+        };
+        
+        _modulo.ContenidoActual = view;
+        
     }
 
     //Comando para limpiar los filtros de búsqueda
