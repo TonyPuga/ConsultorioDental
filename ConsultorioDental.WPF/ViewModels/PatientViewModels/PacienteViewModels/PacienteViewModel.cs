@@ -28,9 +28,11 @@ public partial class PacienteViewModel : ObservableObject
         
         CargarDepartamentos();
     }
-
+        
     [ObservableProperty]
-    private ObservableCollection<DepartamentoModel> departamentos;
+    private ObservableCollection<DepartamentoModel> departamentosPaciente;
+    [ObservableProperty]
+    private ObservableCollection<DepartamentoModel> departamentosApoderado;
 
     [ObservableProperty]
     private DepartamentoModel? departamentoSeleccionadoPaciente;
@@ -41,13 +43,6 @@ public partial class PacienteViewModel : ObservableObject
         {
             CargarProvinciasPaciente(value.IdDepartamento);
         }
-    }
-
-    private void CargarProvinciasPaciente(int idDepartamento)
-    {
-        ProvinciasPaciente.Clear();
-
-        ProvinciasPaciente = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
     }
 
     [ObservableProperty]
@@ -89,6 +84,22 @@ public partial class PacienteViewModel : ObservableObject
 
     [ObservableProperty]
     private ObservableCollection<DistritoModel> distritos;
+
+    private void CargarProvinciasPaciente(int idDepartamento)
+    {
+        ProvinciasPaciente.Clear();
+
+        ProvinciasPaciente = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
+    }
+
+    private void CargarProvinciasApoderado(int idDepartamento)
+    {
+        ProvinciasApoderado.Clear();
+        ProvinciasApoderado = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
+    }
+
+
+    
 
     
     
