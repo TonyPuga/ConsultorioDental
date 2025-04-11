@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConsultorioDental.WPF.Views.PatientViews.PacienteViews" 
-             xmlns:Controls="clr-namespace:ConsultorioDental.WPF.Controls"
+             xmlns:Controls="clr-namespace:ConsultorioDental.WPF.Controls" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="830">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="9"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="9"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="9"/>
         </Grid.RowDefinitions>
         <Border x:Name="brdToolbar" Grid.Row="1" Style="{StaticResource BorderToolbarStyle}">
             <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
@@ -47,70 +50,197 @@
         </Border>
 
         <Controls:SeccionControl Grid.Row="3" TituloSeccion="Datos del Paciente">
-            <Grid>
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="9"/>
-                    <ColumnDefinition Width="0.05*"/>
-                    <ColumnDefinition Width="9"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="9"/>
-                    <ColumnDefinition Width="0.05*"/>
-                    <ColumnDefinition Width="9"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Apellido Paterno" Style="{StaticResource TextBlockGeneralStyle}" />
-                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Paciente.ApellidoPaterno}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
 
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="Apellido Materno" Style="{StaticResource TextBlockGeneralStyle}" />
-                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Paciente.ApellioMaterno}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
+                <!-- Apellido Paterno -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Apellido Paterno" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Paciente.ApellidoPaterno}" Style="{StaticResource TextBoxGeneralStyle}" />
 
-                <TextBlock Grid.Row="7" Grid.Column="1" Text="Nombres" Style="{StaticResource TextBlockGeneralStyle}" />
-                <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Paciente.Nombres}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
+                <!-- Apellido Materno -->
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Apellido Materno" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="6" Text="{Binding Paciente.ApellidoMaterno}" Style="{StaticResource TextBoxGeneralStyle}" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="5" Text="Tipo DOI" Style="{StaticResource TextBlockGeneralStyle}" />
-                <ComboBox Grid.Row="1" Grid.Column="7" ItemsSource="{Binding TiposDOI}" SelectedValue="{Binding Paciente.IdTipoDOI}" DisplayMemberPath="Descripcion" SelectedValuePath="IdTipoParentesco" Margin="0,0,0,5" />
-                
-                <TextBlock Grid.Row="3" Grid.Column="5" Text="Número DOI" Style="{StaticResource TextBlockGeneralStyle}" />
-                <TextBox Grid.Row="3" Grid.Column="7" Text="{Binding Paciente.NumeroDOI}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
+                <!-- Nombre Paciente -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Nombre:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Paciente.Nombre}" Style="{StaticResource TextBoxGeneralStyle}" />
 
-                <TextBlock Grid.Row="7" Grid.Column="5" Text="Teléfono" Style="{StaticResource TextBlockGeneralStyle}" />
-                <TextBox Grid.Row="7" Grid.Column="7" Text="{Binding Paciente.Telefono}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
-                
+                <!-- Fecha Nacimiento -->
+                <TextBlock Grid.Row="2" Grid.Column="4" Text="F. Nacimiento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <DatePicker Grid.Row="2" Grid.Column="6" SelectedDate="{Binding Paciente.FechaNacimiento}" Style="{StaticResource DatePickerGeneralStyle}" />
 
-                <GroupBox Grid.Row="5" Header="Datos Generales" Grid.ColumnSpan="4">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="9"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="9"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="9"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="9"/>
-                            <ColumnDefinition Width="1*"/>                            
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Apellido Paterno" Style="{StaticResource TextBlockGeneralStyle}" />
-                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Paciente.ApellidoPaterno}" Style="{StaticResource TextBoxGeneralStyle}" Margin="0,0,0,5" />
-                    </Grid>
-                </GroupBox>
+                <!-- Tipo DOI -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Tipo DOI:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding TiposDOI}" 
+                          SelectedValue="{Binding Paciente.IdTipoDOI}"
+                          DisplayMemberPath="Descripcion" SelectedValuePath="IdTipoParentesco"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Documento Paciente -->
+                <TextBlock Grid.Row="4" Grid.Column="4" Text="Documento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Apoderado.Documento}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Dirección Paciente -->
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Dirección" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding Paciente.Direccion}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Referencia Dirección Paciente -->
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Referencia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding Paciente.Direccion}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Departamento -->
+                <TextBlock Grid.Row="10" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="10" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Provincia -->
+                <TextBlock Grid.Row="10" Grid.Column="4" Text="Provincia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="10" Grid.Column="6" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Distrito -->
+                <TextBlock Grid.Row="12" Grid.Column="0" Text="Distrito" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="12" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Email Paciente -->
+                <TextBlock Grid.Row="14" Grid.Column="0" Text="e-mail:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="14" Grid.Column="2" Grid.ColumnSpan="5"  Text="{Binding Paciente.Email}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Teléfono Paciente -->
+                <TextBlock Grid.Row="16" Grid.Column="0" Text="Teléfono:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="16" Grid.Column="2" Text="{Binding Paciente.Telefono}" Style="{StaticResource TextBoxGeneralStyle}" />
+
             </Grid>
         </Controls:SeccionControl>
-        
 
+        <Controls:SeccionControl Grid.Row="5" TituloSeccion="Apoderado" Visibility="{Binding EsMenorDeEdad, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>                    
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="9"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- CheckBox: Usar misma dirección -->
+                <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" Content="Usar la misma dirección del paciente" IsChecked="{Binding UsarMismaDireccion}" Margin="0,0,0,10" VerticalAlignment="Center" Style="{StaticResource CheckBoxGeneralStyle}"/>
+
+                <!-- Apellido Paterno -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Apellido Paterno" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Paciente.ApellidoPaterno}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Apellido Materno -->
+                <TextBlock Grid.Row="1" Grid.Column="4" Text="Apellido Materno" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="6" Text="{Binding Paciente.ApellidoMaterno}" Style="{StaticResource TextBoxGeneralStyle}" VerticalAlignment="Center"/>
+
+                <!-- Nombre Paciente -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Nombre:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Paciente.Nombre}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Fecha Nacimiento -->
+                <TextBlock Grid.Row="3" Grid.Column="4" Text="F. Nacimiento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <DatePicker Grid.Row="3" Grid.Column="6" SelectedDate="{Binding Paciente.FechaNacimiento}" Style="{StaticResource DatePickerGeneralStyle}" />
+
+                <!-- Tipo DOI -->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Tipo DOI:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding TiposDOI}"
+                          SelectedValue="{Binding Paciente.IdTipoDOI}"
+                          DisplayMemberPath="Descripcion" SelectedValuePath="IdTipoParentesco"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Documento Paciente -->
+                <TextBlock Grid.Row="5" Grid.Column="4" Text="Documento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="6" Text="{Binding Apoderado.Documento}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Dirección Paciente -->
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Dirección" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding Paciente.Direccion}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Referencia Dirección Paciente -->
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="Referencia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding Paciente.Direccion}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Departamento -->
+                <TextBlock Grid.Row="11" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="11" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Provincia -->
+                <TextBlock Grid.Row="11" Grid.Column="4" Text="Provincia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="11" Grid.Column="6" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Distrito -->
+                <TextBlock Grid.Row="13" Grid.Column="0" Text="Distrito" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="13" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
+                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxGeneralStyle}" />
+
+                <!-- Email Paciente -->
+                <TextBlock Grid.Row="15" Grid.Column="0" Text="e-mail:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="15" Grid.Column="2" Grid.ColumnSpan="5"  Text="{Binding Paciente.Email}" Style="{StaticResource TextBoxGeneralStyle}" />
+
+                <!-- Teléfono Paciente -->
+                <TextBlock Grid.Row="17" Grid.Column="0" Text="Teléfono:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="17" Grid.Column="2" Text="{Binding Paciente.Telefono}" Style="{StaticResource TextBoxGeneralStyle}" />
+            </Grid>
+        </Controls:SeccionControl>
     </Grid>
+    </ScrollViewer>
 </UserControl>

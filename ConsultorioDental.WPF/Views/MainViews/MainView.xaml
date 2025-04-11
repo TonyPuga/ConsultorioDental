@@ -30,16 +30,15 @@
         <Grid>
             <!-- Botón hamburguesa -->
             <Button Content="☰"
-                    Width="50" Height="50"
+                    Width="30" Height="30"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Margin="5"
+                    Margin="2"
                     Command="{Binding ToggleSidebarCommand}"
                     Style="{StaticResource ToggleButtonStyle}"/>
 
             <!-- Vista actual cargada dinámicamente -->
-            <ContentControl Content="{Binding CurrentView}"
-                            Margin="60,0,0,0"/>
+            <ContentControl Content="{Binding CurrentView}" Margin="50,0,0,0"/>
         </Grid>
     </DockPanel>
 </Window>
