@@ -11,11 +11,18 @@ public partial class PacienteViewModel : ObservableObject
 {
     private readonly PatientViewModel _modulo;
     private readonly IDepartamentoRepository _departamentoRepository;
+    private readonly IProvinciaRepository _provinciaRepository;
+    private readonly IDistritoRepository _distritoRepository;   
 
-    public PacienteViewModel(PatientViewModel modulo, IDepartamentoRepository departamentoRepository)
+    public PacienteViewModel(PatientViewModel modulo, 
+                        IDepartamentoRepository departamentoRepository,
+                        IProvinciaRepository provinciaRepository,
+                        IDistritoRepository distritoRepository)
     {
         _modulo = modulo;
         _departamentoRepository = departamentoRepository;
+        _provinciaRepository = provinciaRepository;
+        _distritoRepository = distritoRepository;
 
         Departamentos = new ObservableCollection<DepartamentoModel>();
         
@@ -26,7 +33,65 @@ public partial class PacienteViewModel : ObservableObject
     private ObservableCollection<DepartamentoModel> departamentos;
 
     [ObservableProperty]
-    private DepartamentoModel? departamentoSeleccionado;
+    private DepartamentoModel? departamentoSeleccionadoPaciente;
+
+    partial void OnDepartamentoSeleccionadoPacienteChanged(DepartamentoModel? value)
+    {
+        if (value != null)
+        {
+            CargarProvinciasPaciente(value.IdDepartamento);
+        }
+    }
+
+    private void CargarProvinciasPaciente(int idDepartamento)
+    {
+        ProvinciasPaciente.Clear();
+
+        ProvinciasPaciente = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
+    }
+
+    [ObservableProperty]
+    private DepartamentoModel? departamentoSeleccionadoApoderado;
+
+    partial void OnDepartamentoSeleccionadoApoderadoChanged(DepartamentoModel? value)
+    {
+        if (value != null)
+        {
+            CargarProvinciasApoderado(value.IdDepartamento);
+        }
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<ProvinciaModel> provinciasPaciente;
+
+    [ObservableProperty]
+    private ProvinciaModel? provinciaSeleccionadaPaciente;
+    partial void OnProvinciaSeleccionadaPacienteChanged(ProvinciaModel? value)
+    {
+        if (value != null)
+        {
+            ProvinciaSeleccionadaApoderado = value;
+        }
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<ProvinciaModel> provinciasApoderado;
+
+    [ObservableProperty]
+    private ProvinciaModel? provinciaSeleccionadaApoderado;
+    partial void OnProvinciaSeleccionadaApoderadoChanged(ProvinciaModel? value)
+    {
+        if (value != null)
+        {
+            CargarDistritos(value.IdProvincia);
+        }
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<DistritoModel> distritos;
+
+    
+    
 
     [RelayCommand]
     private void Regresar()

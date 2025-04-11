@@ -54,8 +54,10 @@ public partial class PacienteBusquedaViewModel : ObservableObject
     private void Nuevo()
     {
         var departamentoRepository = new DepartamentoRepository();
-        //_modulo.ContenidoActual = new PacienteView();
-        var viewModel = new PacienteViewModel(_modulo, departamentoRepository);
+        var provinciaRepository = new ProvinciaRepository();
+        var distritoRepository = new DistritoRepository();
+
+        var viewModel = new PacienteViewModel(_modulo, departamentoRepository, provinciaRepository, distritoRepository);
         var view = new PacienteView
         {
             DataContext = viewModel
