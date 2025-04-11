@@ -117,8 +117,8 @@
 
                 <!-- Departamento -->
                 <TextBlock Grid.Row="10" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="10" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
-                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                    <ComboBox Grid.Row="10" Grid.Column="2" ItemsSource="{Binding Departamentos}"
+                          SelectedValue="{Binding Paciente.Direccion.IdDepartamento}" DisplayMemberPath="NombreDepartamento" SelectedValuePath="IdDepartamento"
                           Style="{StaticResource ComboBoxGeneralStyle}" />
 
                 <!-- Provincia -->
@@ -216,8 +216,8 @@
 
                 <!-- Departamento -->
                 <TextBlock Grid.Row="11" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="11" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
-                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                <ComboBox Grid.Row="11" Grid.Column="2" ItemsSource="{Binding Departamentos}"
+                          SelectedValue="{Binding Apoderado.Direccion.IdDepartamento}" DisplayMemberPath="NombreDepartamento" SelectedValuePath="IdDepartamento"
                           Style="{StaticResource ComboBoxGeneralStyle}" />
 
                 <!-- Provincia -->

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ConsultorioDental.WPF.Models;
+using ConsultorioDental.WPF.Repositories.Administracion.Ubigeo;
 using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
 using System.Collections.ObjectModel;
 
@@ -52,8 +53,9 @@ public partial class PacienteBusquedaViewModel : ObservableObject
     [RelayCommand]
     private void Nuevo()
     {
+        var departamentoRepository = new DepartamentoRepository();
         //_modulo.ContenidoActual = new PacienteView();
-        var viewModel = new PacienteViewModel(_modulo);
+        var viewModel = new PacienteViewModel(_modulo, departamentoRepository);
         var view = new PacienteView
         {
             DataContext = viewModel
