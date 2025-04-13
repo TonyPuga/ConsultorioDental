@@ -12,9 +12,9 @@ public partial class PacienteViewModel : ObservableObject
     private readonly PatientViewModel _modulo;
     private readonly IDepartamentoRepository _departamentoRepository;
     private readonly IProvinciaRepository _provinciaRepository;
-    private readonly IDistritoRepository _distritoRepository;   
+    private readonly IDistritoRepository _distritoRepository;
 
-    public PacienteViewModel(PatientViewModel modulo, 
+    public PacienteViewModel(PatientViewModel modulo,
                         IDepartamentoRepository departamentoRepository,
                         IProvinciaRepository provinciaRepository,
                         IDistritoRepository distritoRepository)
@@ -24,11 +24,12 @@ public partial class PacienteViewModel : ObservableObject
         _provinciaRepository = provinciaRepository;
         _distritoRepository = distritoRepository;
 
-        Departamentos = new ObservableCollection<DepartamentoModel>();
-        
+        DepartamentosPaciente = new ObservableCollection<DepartamentoModel>();
+        DepartamentosApoderado = new ObservableCollection<DepartamentoModel>();
+
         CargarDepartamentos();
     }
-        
+
     [ObservableProperty]
     private ObservableCollection<DepartamentoModel> departamentosPaciente;
     [ObservableProperty]
@@ -43,6 +44,8 @@ public partial class PacienteViewModel : ObservableObject
         {
             CargarProvinciasPaciente(value.IdDepartamento);
         }
+
+        ProvinciaSeleccionadaPaciente = null;
     }
 
     [ObservableProperty]
@@ -65,7 +68,7 @@ public partial class PacienteViewModel : ObservableObject
     {
         if (value != null)
         {
-            ProvinciaSeleccionadaApoderado = value;
+            CargarDistritosPaciente(value.IdProvincia);
         }
     }
 
@@ -78,16 +81,28 @@ public partial class PacienteViewModel : ObservableObject
     {
         if (value != null)
         {
-            CargarDistritos(value.IdProvincia);
+            CargarDistritosApoderado(value.IdProvincia);
         }
     }
 
     [ObservableProperty]
-    private ObservableCollection<DistritoModel> distritos;
+    private ObservableCollection<DistritoModel> distritosPaciente;
+
+    [ObservableProperty]
+    private ObservableCollection<DistritoModel> distritosApoderado;
+
+    [ObservableProperty]
+    private DistritoModel? distritoSeleccionadoPaciente;
+
+    [ObservableProperty]
+    private DistritoModel? distritoSeleccionadoApoderado;
 
     private void CargarProvinciasPaciente(int idDepartamento)
     {
-        ProvinciasPaciente.Clear();
+        if (ProvinciasPaciente != null)
+        {
+            ProvinciasPaciente.Clear();
+        }
 
         ProvinciasPaciente = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
     }
@@ -98,11 +113,21 @@ public partial class PacienteViewModel : ObservableObject
         ProvinciasApoderado = new ObservableCollection<ProvinciaModel>(_provinciaRepository.ListarProvinciaTodo(idDepartamento));
     }
 
+    private void CargarDistritosPaciente(int idProvincia)
+    {
+        if (DistritosPaciente != null)
+        {
+            DistritosPaciente.Clear(); 
+        }
 
-    
+        DistritosPaciente = new ObservableCollection<DistritoModel>(_distritoRepository.ListarDistritoTodo(idProvincia));
+    }
 
-    
-    
+    private void CargarDistritosApoderado(int idProvincia)
+    {
+        DistritosApoderado.Clear();
+        DistritosApoderado = new ObservableCollection<DistritoModel>(_distritoRepository.ListarDistritoTodo(idProvincia));
+    }
 
     [RelayCommand]
     private void Regresar()
@@ -118,8 +143,10 @@ public partial class PacienteViewModel : ObservableObject
 
     private void CargarDepartamentos()
     {
-        Departamentos.Clear();
+        DepartamentosPaciente.Clear();
+        DepartamentosApoderado.Clear();
 
-        Departamentos = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
+        DepartamentosPaciente = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
+        DepartamentosApoderado = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
     }
 }

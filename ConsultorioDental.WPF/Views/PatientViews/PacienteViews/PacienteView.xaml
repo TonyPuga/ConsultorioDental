@@ -118,20 +118,22 @@
                 <!-- Departamento -->
                 <TextBlock Grid.Row="10" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
                     <ComboBox Grid.Row="10" Grid.Column="2" ItemsSource="{Binding DepartamentosPaciente}"
-                              SelectedItem="{Binding SelectedDepartamentoPaciente}"
-                              SelectedValue="{Binding Paciente.Direccion.IdDepartamento}" DisplayMemberPath="NombreDepartamento" SelectedValuePath="IdDepartamento"
+                              SelectedItem="{Binding DepartamentoSeleccionadoPaciente, Mode=TwoWay}"
+                              DisplayMemberPath="NombreDepartamento"
                               Style="{StaticResource ComboBoxGeneralStyle}" />
 
                 <!-- Provincia -->
                 <TextBlock Grid.Row="10" Grid.Column="4" Text="Provincia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="10" Grid.Column="6" ItemsSource="{Binding TiposParentesco}"
-                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                <ComboBox Grid.Row="10" Grid.Column="6" ItemsSource="{Binding ProvinciasPaciente}"
+                          SelectedItem="{Binding ProvinciaSeleccionadaPaciente, Mode=TwoWay}" 
+                          DisplayMemberPath="NombreProvincia" 
                           Style="{StaticResource ComboBoxGeneralStyle}" />
 
                 <!-- Distrito -->
                 <TextBlock Grid.Row="12" Grid.Column="0" Text="Distrito" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="12" Grid.Column="2" ItemsSource="{Binding TiposParentesco}"
-                          SelectedValue="{Binding Apoderado.IdTipoParentesco}" DisplayMemberPath="Descripcion" SelectedValuePath="Id"
+                    <ComboBox Grid.Row="12" Grid.Column="2" ItemsSource="{Binding DistritosPaciente}"
+                          SelectedValue="{Binding DistritoSeleccionadoPaciente, Mode=TwoWay}" 
+                          DisplayMemberPath="NombreDistrito" 
                           Style="{StaticResource ComboBoxGeneralStyle}" />
 
                 <!-- Email Paciente -->
