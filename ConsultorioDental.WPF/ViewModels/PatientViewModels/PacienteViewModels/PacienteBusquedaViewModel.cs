@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ConsultorioDental.WPF.Models;
+using ConsultorioDental.WPF.Repositories.Administracion.Tipo;
 using ConsultorioDental.WPF.Repositories.Administracion.Ubigeo;
 using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
 using System.Collections.ObjectModel;
@@ -56,8 +57,9 @@ public partial class PacienteBusquedaViewModel : ObservableObject
         var departamentoRepository = new DepartamentoRepository();
         var provinciaRepository = new ProvinciaRepository();
         var distritoRepository = new DistritoRepository();
+        var tipoRepository = new TipoRepository();
 
-        var viewModel = new PacienteViewModel(_modulo, departamentoRepository, provinciaRepository, distritoRepository);
+        var viewModel = new PacienteViewModel(_modulo, departamentoRepository, provinciaRepository, distritoRepository, tipoRepository);
         var view = new PacienteView
         {
             DataContext = viewModel
