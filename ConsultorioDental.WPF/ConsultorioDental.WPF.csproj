@@ -9,13 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Resources\ValidationRules\**" />
-    <EmbeddedResource Remove="Resources\ValidationRules\**" />
-    <None Remove="Resources\ValidationRules\**" />
-    <Page Remove="Resources\ValidationRules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Resources\BotonBuscar.png" />
     <None Remove="Resources\BotonEditar.png" />
     <None Remove="Resources\BotonEliminar.png" />
