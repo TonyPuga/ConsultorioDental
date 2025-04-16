@@ -86,6 +86,6 @@ namespace ConsultorioDental.WPF.Views.PatientViews.PacienteViews
             {
                 e.CancelCommand();
             }
-        }
+        }       
     }
 }
