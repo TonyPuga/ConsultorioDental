@@ -161,7 +161,8 @@
                             <TextBox.Text>
                                 <Binding Path="DocumentoPaciente"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True" />
                                     </Binding.ValidationRules>
@@ -207,7 +208,7 @@
                                 <Binding Path="DepartamentoSeleccionadoPaciente"
                                          Mode="TwoWay">
                                     <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
+                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.SelectedItem>
@@ -223,7 +224,7 @@
                                 <Binding Path="ProvinciaSeleccionadaPaciente"
                                          Mode="TwoWay">
                                     <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule />
+                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.SelectedItem>
@@ -239,7 +240,7 @@
                                 <Binding Path="DistritoSeleccionadoPaciente"
                                          Mode="TwoWay">
                                     <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule />
+                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.SelectedItem>

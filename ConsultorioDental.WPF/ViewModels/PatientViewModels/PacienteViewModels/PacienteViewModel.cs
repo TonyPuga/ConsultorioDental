@@ -37,6 +37,7 @@ public partial class PacienteViewModel : ObservableObject
         FechaNacimientoApoderadoSeleccionado = DateTime.Now;
 
         EsMenorDeEdad = false;
+        
         CargarDepartamentos();
         CargarTipo();
     }
