@@ -213,6 +213,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <!-- Trigger para cuando la propiedad ValidatesOnNotifyDataErrors encuentra errores -->
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderBrush" Value="Red" />
+                <Setter Property="BorderThickness" Value="1" />
+                <!--<Setter Property="CornerRadius" Value="2"/>-->
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="DataGrid">

@@ -7,10 +7,11 @@ using ConsultorioDental.WPF.Repositories.Administracion.Tipo;
 using ConsultorioDental.WPF.Repositories.Administracion.Ubigeo;
 using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConsultorioDental.WPF.ViewModels.PatientViewModels.PacienteViewModels;
 
-public partial class PacienteViewModel : ObservableObject
+public partial class PacienteViewModel : ObservableValidator
 {
     private readonly PatientViewModel _modulo;
     private readonly IDepartamentoRepository _departamentoRepository;
@@ -83,14 +84,17 @@ public partial class PacienteViewModel : ObservableObject
 
     #region Propiedades Paciente
     [ObservableProperty]
+    [Required(ErrorMessage = "El apellido paterno es requerido.")]
     private string apellidoPaternoPaciente;
     partial void OnApellidoPaternoPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El apellido materno es requerido.")]
     private string apellidoMaternoPaciente;
     partial void OnApellidoMaternoPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El nombre es requerido.")]
     private string nombrePaciente;
     partial void OnNombrePacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
@@ -98,6 +102,7 @@ public partial class PacienteViewModel : ObservableObject
     private bool esMenorDeEdad;
 
     [ObservableProperty]
+    [Required(ErrorMessage = "La fecha de nacimiento es requerida.")]
     private DateTime fechaNacimientoPacienteSeleccionada;
     partial void OnFechaNacimientoPacienteSeleccionadaChanged(DateTime value)
     {
@@ -115,6 +120,7 @@ public partial class PacienteViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El tipo de documento es requerido.")]
     private TipoModel tipoDOIPacienteSeleccionado;
     partial void OnTipoDOIPacienteSeleccionadoChanged(TipoModel value)
     {
@@ -132,7 +138,8 @@ public partial class PacienteViewModel : ObservableObject
         GuardarCommand.NotifyCanExecuteChanged();
     }
 
-    [ObservableProperty]
+    [ObservableProperty]    
+    [CustomValidation(typeof(PacienteViewModel), nameof(ValidarDocumento))]
     private string documentoPaciente;
     partial void OnDocumentoPacienteChanged(string value)
     {
@@ -147,14 +154,17 @@ public partial class PacienteViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    [Required(ErrorMessage = "La dirección es requerida.")]
     private string direccionPaciente;
     partial void OnDireccionPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "La referencia es requerida.")]
     private string referenciaDireccionPaciente;
     partial void OnReferenciaDireccionPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El departamento es requerido.")]
     private DepartamentoModel? departamentoSeleccionadoPaciente;
     partial void OnDepartamentoSeleccionadoPacienteChanged(DepartamentoModel? value)
     {
@@ -168,6 +178,7 @@ public partial class PacienteViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    [Required(ErrorMessage = "La provincia es requerida.")]
     private ProvinciaModel? provinciaSeleccionadaPaciente;
     partial void OnProvinciaSeleccionadaPacienteChanged(ProvinciaModel? value)
     {
@@ -181,14 +192,17 @@ public partial class PacienteViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El distrito es requerido.")]
     private DistritoModel? distritoSeleccionadoPaciente;
     partial void OnDistritoSeleccionadoPacienteChanged(DistritoModel? value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El email es requerido.")]
     private string emailPaciente;
     partial void OnEmailPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
 
     [ObservableProperty]
+    [Required(ErrorMessage = "El teléfono es requerido.")]
     private string telefonoPaciente;
     partial void OnTelefonoPacienteChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
     #endregion Propiedades Paciente
@@ -292,6 +306,16 @@ public partial class PacienteViewModel : ObservableObject
     partial void OnTelefonoApoderadoChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
     #endregion Propiedades Apoderado
 
+    #region Methods Private
+    private void CargarDepartamentos()
+    {
+        DepartamentosPaciente.Clear();
+        DepartamentosApoderado.Clear();
+
+        DepartamentosPaciente = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
+        DepartamentosApoderado = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
+    }
+
     private void CargarProvinciasPaciente(int idDepartamento)
     {
         if (ProvinciasPaciente != null)
@@ -332,6 +356,31 @@ public partial class PacienteViewModel : ObservableObject
         DistritosApoderado = new ObservableCollection<DistritoModel>(_distritoRepository.ListarDistritoTodo(idProvincia));
     }
 
+    private void CargarTipo()
+    {
+        TiposDOIPaciente = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.TipoDOI));
+        TiposDOIApoderado = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.TipoDOI));
+
+        TiposParentesco = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.Parentesco));
+    }
+
+    public static ValidationResult? ValidarDocumento(string documento, ValidationContext context)
+    {
+        if (string.IsNullOrWhiteSpace(documento))
+        {
+            return new ValidationResult("El documento es requerido.");
+        }
+
+        if (decimal.TryParse(documento, out var valor) && valor == 0)
+        {
+            return new ValidationResult("El documento no puede ser 0.");
+        }
+
+        return ValidationResult.Success;
+    }
+    #endregion Methods Private
+
+    #region Commands
     [RelayCommand(CanExecute = nameof(CanGuardar))]
     private void Guardar()
     {
@@ -389,21 +438,5 @@ public partial class PacienteViewModel : ObservableObject
 
         _modulo.ContenidoActual = view;
     }
-
-    private void CargarDepartamentos()
-    {
-        DepartamentosPaciente.Clear();
-        DepartamentosApoderado.Clear();
-
-        DepartamentosPaciente = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
-        DepartamentosApoderado = new ObservableCollection<DepartamentoModel>(_departamentoRepository.ListarDepartamentoTodo());
-    }
-
-    private void CargarTipo()
-    {
-        TiposDOIPaciente = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.TipoDOI));
-        TiposDOIApoderado = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.TipoDOI));
-
-        TiposParentesco = new ObservableCollection<TipoModel>(_tipoRepository.ListarTipoPorSupertipoId((int)SuperTipoEnum.Parentesco));
-    }
+    #endregion Commands
 }

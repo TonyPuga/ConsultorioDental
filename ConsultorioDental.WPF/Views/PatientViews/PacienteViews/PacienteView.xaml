@@ -92,11 +92,7 @@
                                 <Binding Path="ApellidoPaternoPaciente"
                                          Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -107,26 +103,18 @@
                                 <Binding Path="ApellidoMaternoPaciente"
                                          Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
-                        
-                        <!-- Nombre Paciente -->                        
+
+                        <!-- Nombre Paciente -->
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Nombre:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
                         <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBoxGeneralStyle}" >
                             <TextBox.Text>
                                 <Binding Path="NombrePaciente"
                                          Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -144,43 +132,33 @@
                                 <Binding Path="TipoDOIPacienteSeleccionado" 
                                          Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
                         <!-- Documento Paciente -->
-                        <TextBlock Grid.Row="4" Grid.Column="4" Text="Documento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="4" Grid.Column="4" Text="Documento:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center" />
                         <TextBox Grid.Row="4" Grid.Column="6"
-                                 Style="{StaticResource TextBoxGeneralStyle}" 
-                             PreviewTextInput="DocumentoPaciente_PreviewTextInput"
-                             DataObject.Pasting="DocumentoPaciente_Pasting">
+                                 Style="{StaticResource TextBoxGeneralStyle}"
+                                 MaxLength="{Binding LogitudDocumentoPaciente}" 
+                                 PreviewTextInput="Documento_PreviewTextInput"
+                                 DataObject.Pasting="Documento_Pasting">
                             <TextBox.Text>
                                 <Binding Path="DocumentoPaciente"
                                          Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
                         <!-- Dirección Paciente -->
                         <TextBlock Grid.Row="6" Grid.Column="0" Text="Dirección" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" Style="{StaticResource TextBoxGeneralStyle}" MaxLength="{Binding LogitudDocumentoPaciente}" >
+                        <TextBox Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" Style="{StaticResource TextBoxGeneralStyle}" >
                             <TextBox.Text>
                                 <Binding Path="DireccionPaciente"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -190,11 +168,8 @@
                             <TextBox.Text>
                                 <Binding Path="ReferenciaDireccionPaciente"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -206,11 +181,9 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="DepartamentoSeleccionadoPaciente"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
@@ -220,13 +193,11 @@
                                   ItemsSource="{Binding ProvinciasPaciente}"
                                   DisplayMemberPath="NombreProvincia" 
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
-                            <ComboBox.SelectedItem>                                
+                            <ComboBox.SelectedItem>
                                 <Binding Path="ProvinciaSeleccionadaPaciente"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
@@ -238,11 +209,9 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="DistritoSeleccionadoPaciente"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
@@ -253,26 +222,21 @@
                                 <Binding Path="EmailPaciente"
                                          UpdateSourceTrigger="PropertyChanged"
                                          Mode="TwoWay"
-                                         NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:EmailValidationRule ValidatesOnTargetUpdated="True"/>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
                         <!-- Teléfono Paciente -->
                         <TextBlock Grid.Row="16" Grid.Column="0" Text="Teléfono:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="16" Grid.Column="2" Style="{StaticResource TextBoxGeneralStyle}" >
+                        <TextBox Grid.Row="16" Grid.Column="2" 
+                                 Style="{StaticResource TextBoxGeneralStyle}" 
+                                 PreviewTextInput="TextBoxNumeroTelefonico_PreviewTextInput"
+                                 DataObject.Pasting="TextBoxNumeroTelefonico_Pasting">
                             <TextBox.Text>
                                 <Binding Path ="TelefonoPaciente"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -324,11 +288,8 @@
                             <TextBox.Text>
                                 <Binding Path="ApellidoPaternoApoderado" 
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -338,11 +299,8 @@
                             <TextBox.Text>
                                 <Binding Path="ApellidoMaternoApoderado" 
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged" 
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -352,11 +310,8 @@
                             <TextBox.Text>
                                 <Binding Path="NombreApoderado"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -373,11 +328,8 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="TipoDOIApoderadoSeleccionado"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
@@ -386,16 +338,13 @@
                         <TextBox Grid.Row="5" Grid.Column="6" 
                              Style="{StaticResource TextBoxGeneralStyle}" 
                              MaxLength="{Binding LogitudDocumentoApoderado}" 
-                             PreviewTextInput="DocumentoApoderado_PreviewTextInput"
-                             DataObject.Pasting="DocumentoApoderado_Pasting" >
+                             PreviewTextInput="Documento_PreviewTextInput"
+                             DataObject.Pasting="Documento_Pasting" >
                             <TextBox.Text>
                                 <Binding Path="DocumentoApoderado"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
 
                         </TextBox>
@@ -408,11 +357,8 @@
                               Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedValue>
                                 <Binding Path="IdTipoParentesco"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedValue>
                         </ComboBox>
 
@@ -422,11 +368,8 @@
                             <TextBox.Text>
                                 <Binding Path="DireccionApoderado"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged" >
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
@@ -436,15 +379,12 @@
                             <TextBox.Text>
                                 <Binding Path="ReferenciaDireccionApoderado"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
 
-                        <!-- Departamento -->
+                        <!-- Departamento Apoderado -->
                         <TextBlock Grid.Row="13" Grid.Column="0" Text="Departamento" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
                         <ComboBox Grid.Row="13" Grid.Column="2" 
                                   ItemsSource="{Binding DepartamentosApoderado}"
@@ -452,15 +392,12 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="DepartamentoSeleccionadoApoderado"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
-                        <!-- Provincia -->
+                        <!-- Provincia Apoderado-->
                         <TextBlock Grid.Row="13" Grid.Column="4" Text="Provincia" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
                         <ComboBox Grid.Row="13" Grid.Column="6" 
                                   ItemsSource="{Binding ProvinciasApoderado}"
@@ -468,11 +405,8 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="ProvinciaSeleccionadaApoderado"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
@@ -484,40 +418,36 @@
                                   Style="{StaticResource ComboBoxGeneralStyle}" >
                             <ComboBox.SelectedItem>
                                 <Binding Path="DistritoSeleccionadoApoderado"
-                                         Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:ComboRequeridoValidationRule ValidatesOnTargetUpdated="True" />
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         Mode="TwoWay"
+                                         NotifyOnValidationError="True"/>
                             </ComboBox.SelectedItem>
                         </ComboBox>
 
-                        <!-- Email Paciente -->
+                        <!-- Email Apoderado -->
                         <TextBlock Grid.Row="17" Grid.Column="0" Text="e-mail:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
                         <TextBox Grid.Row="17" Grid.Column="2" Grid.ColumnSpan="5"  Style="{StaticResource TextBoxGeneralStyle}" >
                             <TextBox.Text>
                                 <Binding Path="EmailApoderado"
                                          Mode="TwoWay" 
-                                         UpdateSourceTrigger="PropertyChanged">
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <ValidationRules:EmailValidationRule ValidatesOnTargetUpdated="True"/>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True" />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
 
-                        <!-- Teléfono Paciente -->
+                        <!-- Teléfono Apoderado -->
                         <TextBlock Grid.Row="19" Grid.Column="0" Text="Teléfono:" Style="{StaticResource TextBlockGeneralStyle}" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="19" Grid.Column="2" Style="{StaticResource TextBoxGeneralStyle}" >
+                        <TextBox Grid.Row="19" Grid.Column="2" Style="{StaticResource TextBoxGeneralStyle}" 
+                                 PreviewTextInput="TextBoxNumeroTelefonico_PreviewTextInput"
+                                 DataObject.Pasting="TextBoxNumeroTelefonico_Pasting">
                             <TextBox.Text>
                                 <Binding Path="TelefonoApoderado"
                                          Mode="TwoWay"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <ValidationRules:RequeridoValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
+                                         UpdateSourceTrigger="PropertyChanged"
+                                         NotifyOnValidationError="True"/>
                             </TextBox.Text>
                         </TextBox>
                     </Grid>
