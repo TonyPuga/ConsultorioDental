@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConsultorioDental.WPF.Helpers"
+        xmlns:viewModels="clr-namespace:ConsultorioDental.WPF.ViewModels.MainViewModels"
         mc:Ignorable="d"
         Title="Dental Clinic" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
@@ -20,10 +21,10 @@
                     Background="#2C3E50"
                     DockPanel.Dock="Left"
                     Visibility="{Binding IsSidebarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Button Content="Dashboard" Command="{Binding NavigateCommand}" CommandParameter="Dashboard" Style="{StaticResource MenuButtonStyle}"/>
-            <Button Content="Pacientes" Command="{Binding NavigateCommand}" CommandParameter="Patients" Style="{StaticResource MenuButtonStyle}"/>
-            <Button Content="Citas" Command="{Binding NavigateCommand}" CommandParameter="Appointments" Style="{StaticResource MenuButtonStyle}"/>
-            <Button Content="Facturación" Command="{Binding NavigateCommand}" CommandParameter="Billing" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Dashboard" Command="{Binding NavigateCommand}" CommandParameter="{x:Static viewModels:Module.Dashboard}" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Pacientes" Command="{Binding NavigateCommand}" CommandParameter="{x:Static viewModels:Module.Patients}" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Citas" Command="{Binding NavigateCommand}" CommandParameter="{x:Static viewModels:Module.Appointments}" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Facturación" Command="{Binding NavigateCommand}" CommandParameter="{x:Static viewModels:Module.Billing}" Style="{StaticResource MenuButtonStyle}"/>
         </StackPanel>
 
         <!-- Contenido principal -->

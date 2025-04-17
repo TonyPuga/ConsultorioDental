@@ -1,4 +1,5 @@
 ﻿using ConsultorioDental.WPF.ViewModels.MainViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace ConsultorioDental.WPF.Views.MainViews
@@ -11,7 +12,9 @@ namespace ConsultorioDental.WPF.Views.MainViews
         public MainView()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+
+            // Resolver el ViewModel desde el contenedor de dependencias
+            DataContext = App.ServiceProvider.GetRequiredService<MainWindowViewModel>();
         }
     }
 }

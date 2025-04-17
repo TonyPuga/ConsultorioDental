@@ -6,6 +6,7 @@ using ConsultorioDental.WPF.Models.Enums;
 using ConsultorioDental.WPF.Repositories.Administracion.Tipo;
 using ConsultorioDental.WPF.Repositories.Administracion.Ubigeo;
 using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,18 +19,21 @@ public partial class PacienteViewModel : ObservableValidator
     private readonly IProvinciaRepository _provinciaRepository;
     private readonly IDistritoRepository _distritoRepository;
     private readonly ITipoRepository _tipoRepository;
+    private readonly IServiceProvider _serviceProvider;
 
     public PacienteViewModel(PatientViewModel modulo,
                         IDepartamentoRepository departamentoRepository,
                         IProvinciaRepository provinciaRepository,
                         IDistritoRepository distritoRepository,
-                        ITipoRepository tipoRepository)
+                        ITipoRepository tipoRepository,
+                        IServiceProvider serviceProvider)
     {
         _modulo = modulo;
         _departamentoRepository = departamentoRepository;
         _provinciaRepository = provinciaRepository;
         _distritoRepository = distritoRepository;
         _tipoRepository = tipoRepository;
+        _serviceProvider = serviceProvider;
 
         DepartamentosPaciente = new ObservableCollection<DepartamentoModel>();
         DepartamentosApoderado = new ObservableCollection<DepartamentoModel>();
@@ -38,14 +42,14 @@ public partial class PacienteViewModel : ObservableValidator
         FechaNacimientoApoderadoSeleccionado = DateTime.Now;
 
         EsMenorDeEdad = false;
-        
+
         CargarDepartamentos();
         CargarTipo();
     }
 
     [ObservableProperty]
     private ObservableCollection<DepartamentoModel> departamentosPaciente;
-    
+
     [ObservableProperty]
     private ObservableCollection<DepartamentoModel> departamentosApoderado;
 
@@ -128,7 +132,7 @@ public partial class PacienteViewModel : ObservableValidator
         {
             DocumentoPaciente = string.Empty;
 
-            if(value.Longitud_Tipo != null)
+            if (value.Longitud_Tipo != null)
             {
                 LogitudDocumentoPaciente = (int)value.Longitud_Tipo;
             }
@@ -138,7 +142,7 @@ public partial class PacienteViewModel : ObservableValidator
         GuardarCommand.NotifyCanExecuteChanged();
     }
 
-    [ObservableProperty]    
+    [ObservableProperty]
     [CustomValidation(typeof(PacienteViewModel), nameof(ValidarDocumento))]
     private string documentoPaciente;
     partial void OnDocumentoPacienteChanged(string value)
@@ -219,7 +223,7 @@ public partial class PacienteViewModel : ObservableValidator
     [ObservableProperty]
     private string nombreApoderado;
     partial void OnNombreApoderadoChanged(string value) => GuardarCommand.NotifyCanExecuteChanged();
-        
+
     [ObservableProperty]
     private DateTime fechaNacimientoApoderadoSeleccionado;
     partial void OnFechaNacimientoApoderadoSeleccionadoChanged(DateTime value) => GuardarCommand.NotifyCanExecuteChanged();
@@ -236,7 +240,7 @@ public partial class PacienteViewModel : ObservableValidator
                 LogitudDocumentoApoderado = (int)value.Longitud_Tipo;
             }
 
-           PermitirSoloNumerosApoderado = value.IdTipo == (int)TipoDOIEnum.DNI || value.IdTipo == (int)TipoDOIEnum.RUC;
+            PermitirSoloNumerosApoderado = value.IdTipo == (int)TipoDOIEnum.DNI || value.IdTipo == (int)TipoDOIEnum.RUC;
         }
         GuardarCommand.NotifyCanExecuteChanged();
     }
@@ -421,7 +425,7 @@ public partial class PacienteViewModel : ObservableValidator
                 && ProvinciaSeleccionadaApoderado != null
                 && DistritoSeleccionadoApoderado != null
                 && !string.IsNullOrWhiteSpace(EmailApoderado)
-                && !string.IsNullOrWhiteSpace(TelefonoApoderado); 
+                && !string.IsNullOrWhiteSpace(TelefonoApoderado);
         }
 
         return datosPacienteValidos && datosApoderadoValidos;
@@ -430,12 +434,14 @@ public partial class PacienteViewModel : ObservableValidator
     [RelayCommand]
     private void Regresar()
     {
-        var viewModel = new PacienteBusquedaViewModel(_modulo);
-        var view = new PacienteBusquedaView
-        {
-            DataContext = viewModel
-        };
+        // Usa el contenedor de dependencias para resolver las vistas y el ViewModel
+        var viewModel = _serviceProvider.GetRequiredService<PacienteBusquedaViewModel>();
+        var view = _serviceProvider.GetRequiredService<PacienteBusquedaView>();
 
+        // Establece el DataContext de la vista
+        view.DataContext = viewModel;
+
+        // Actualiza el contenido actual en el módulo
         _modulo.ContenidoActual = view;
     }
     #endregion Commands

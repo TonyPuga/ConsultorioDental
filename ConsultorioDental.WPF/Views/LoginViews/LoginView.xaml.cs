@@ -1,4 +1,5 @@
 ﻿using ConsultorioDental.WPF.ViewModels.LoginViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace ConsultorioDental.WPF.Views
@@ -11,8 +12,10 @@ namespace ConsultorioDental.WPF.Views
         public LoginView()
         {
             InitializeComponent();
-            //DataContext = new LoginViewModel();
-            DataContext = new LoginViewModel();
+
+            // Asignar el DataContext usando el contenedor de dependencias
+            DataContext = App.ServiceProvider.GetRequiredService<LoginViewModel>();
+
             Loaded += LoginView_Loaded;
         }
 

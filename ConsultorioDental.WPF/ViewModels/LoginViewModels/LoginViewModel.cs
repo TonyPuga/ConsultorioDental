@@ -19,16 +19,17 @@ public partial class LoginViewModel : ObservableObject
     partial void OnPasswordChanged(SecureString? value) =>
         LoginCommand.NotifyCanExecuteChanged();
 
-    private IUsuarioRepository usuarioRepository;
-    public LoginViewModel()
+    private IUsuarioRepository _usuarioRepository;
+    // Constructor con inyección de dependencias
+    public LoginViewModel(IUsuarioRepository usuarioRepository)
     {
-        usuarioRepository = new UsuarioRepository();
+        _usuarioRepository = usuarioRepository;
     }
 
     [RelayCommand(CanExecute = nameof(CanLogin))]
     private void Login()
     {
-        var isValidUser = usuarioRepository.IniciarSesion(UserName, Password);
+        var isValidUser = _usuarioRepository.IniciarSesion(UserName, Password);
         MainView? mainView = new MainView();
         mainView.Show();
         Application.Current.Windows[0]?.Close();

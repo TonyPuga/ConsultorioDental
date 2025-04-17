@@ -15,11 +15,23 @@ public partial class MainWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private UserControl currentView;
-    
-    public MainWindowViewModel()
+
+    private readonly UserControl _dashboardView;
+    private readonly UserControl _patientsView;
+    private readonly UserControl _appointmentView;
+    private readonly UserControl _billingView;
+
+    // Constructor con inyección de dependencias
+    public MainWindowViewModel(DashboardView dashboardView, PatientsView patientsView,
+                        AppointmentView appointmentView, BillingView billingView)
     {
+        _dashboardView = dashboardView;
+        _patientsView = patientsView;
+        _appointmentView = appointmentView;
+        _billingView = billingView;
+
         // Cargar vista por defecto
-        Navigate("Dashboard");
+        Navigate(Module.Dashboard);
     }
 
     [RelayCommand]
@@ -29,25 +41,33 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void Navigate(string module)
+    private void Navigate(Module module)
     {
         switch (module)
         {
-            case "Dashboard":
-                CurrentView = new DashboardView(); 
+            case Module.Dashboard:
+                CurrentView = _dashboardView;
                 break;
-            case "Patients":
-                CurrentView = new PatientsView(); 
+            case Module.Patients:
+                CurrentView = _patientsView;
                 break;
-            case "Appointments":
-                CurrentView = new AppointmentView(); 
+            case Module.Appointments:
+                CurrentView = _appointmentView;
                 break;
-            case "Billing":
-                CurrentView = new BillingView(); 
+            case Module.Billing:
+                CurrentView = _billingView;
                 break;
             default:
                 CurrentView = null; 
                 break;
         }
     }
+}
+
+public enum Module
+{
+    Dashboard,
+    Patients,
+    Appointments,
+    Billing
 }

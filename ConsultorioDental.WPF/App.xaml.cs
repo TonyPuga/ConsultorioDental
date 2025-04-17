@@ -7,6 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using ConsultorioDental.WPF.ViewModels.MainViewModels;
+using ConsultorioDental.WPF.Repositories.Usuario;
+using System.Windows.Controls;
+using ConsultorioDental.WPF.Views.DashboardViews;
+using ConsultorioDental.WPF.Views.PatientViews;
+using ConsultorioDental.WPF.Views.AppointmentViews;
+using ConsultorioDental.WPF.Views.BillingViews;
+using ConsultorioDental.WPF.ViewModels.PatientViewModels;
+using ConsultorioDental.WPF.ViewModels.PatientViewModels.PacienteViewModels;
+using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
 
 namespace ConsultorioDental.WPF;
 
@@ -36,18 +45,33 @@ public partial class App : Application
     private void ConfigureServices(IServiceCollection services)
     {
         // Registrar repositorios, servicios y ViewModels
-        services.AddSingleton<DepartamentoRepository>();
-        services.AddSingleton<ProvinciaRepository>();
-        services.AddSingleton<DistritoRepository>();
-        services.AddSingleton<TipoRepository>();
+        services.AddSingleton<IDepartamentoRepository, DepartamentoRepository>();
+        services.AddSingleton<IProvinciaRepository, ProvinciaRepository>();
+        services.AddSingleton<IDistritoRepository, DistritoRepository>();
+        services.AddSingleton<ITipoRepository, TipoRepository>();
+        services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
+
+        // Registrar vistas principales como UserControl
+        services.AddSingleton<DashboardView>();
+        services.AddSingleton<PatientsView>();
+        services.AddSingleton<AppointmentView>();
+        services.AddSingleton<BillingView>();
 
         // Registrar ViewModels
         services.AddTransient<LoginViewModel>();
         services.AddTransient<MainWindowViewModel>();
+        
+        services.AddTransient<PatientViewModel>();
+        services.AddTransient<PacienteBusquedaViewModel>();
+        services.AddTransient<PacienteViewModel>();
 
         // Registrar vistas
         services.AddTransient<LoginView>();
         services.AddTransient<MainView>();
+        
+        services.AddTransient<PatientsView>();
+        services.AddTransient<PacienteBusquedaView>();
+        services.AddTransient<PacienteView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)
