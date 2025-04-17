@@ -12,6 +12,12 @@ public partial class PatientViewModel : ObservableObject
     [ObservableProperty]
     private Object? contenidoActual;
 
+    partial void OnContenidoActualChanged(Object? value)
+    {
+        // Aquí puedes agregar lógica adicional si es necesario
+        Console.WriteLine("Vista actual actualizada a PacienteView.");
+    }
+
     private readonly IServiceProvider _serviceProvider;
 
     // Constructor con inyección de dependencias

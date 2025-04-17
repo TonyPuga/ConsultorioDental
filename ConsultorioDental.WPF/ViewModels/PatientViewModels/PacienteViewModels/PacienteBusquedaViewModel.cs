@@ -7,6 +7,7 @@ using ConsultorioDental.WPF.ViewModels.MainViewModels;
 using ConsultorioDental.WPF.Views.PatientViews.PacienteViews;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace ConsultorioDental.WPF.ViewModels.PatientViewModels.PacienteViewModels;
 
@@ -86,8 +87,8 @@ public partial class PacienteBusquedaViewModel : ObservableObject
         Console.WriteLine("PacienteViewModel y PacienteView resueltos correctamente.");
 
         // Actualizar el contenido actual en el módulo
-        _patientViewModel.ContenidoActual = view;
-
+        //_patientViewModel.ContenidoActual = //view;
+        _patientViewModel.ContenidoActual = new TextBlock { Text = "Vista Paciente cargada correctamente", FontSize = 20 };
         Console.WriteLine("Vista actual actualizada a PacienteView.");
     }
 
